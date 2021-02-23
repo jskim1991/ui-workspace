@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import TodoListView from '../views/TodoListView';
 import { inject, observer} from "mobx-react";
 import autobind from "autobind-decorator";
+import TodoListView from "../views/TodoListView";
 
 @inject('todoStore')
 @autobind
