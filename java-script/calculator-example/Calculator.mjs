@@ -1,76 +1,64 @@
-/* Function */
-// 1. 함수 선언문
-// 함수에 대한 hoisting 적용
-// 브라우저 글로벌 객체인 window에 testFunc가 포함됨
+/*
+import { isNumber, isOperation } from './Validator.mjs'; // export function
+isNumber(10); // export function
 
-testFunc(); // hoisting
+import validator from './Validator.mjs'; // export default
+validator.isNumber(10); // export default
 
-function testFunc() {
-    console.log("Test Function");
+*/
+
+import validator from './Validator.mjs';
+
+let inputDatas = [];
+
+function appendData(inputData) {
+    inputDatas.push(inputData);
 }
 
-testFunc();
-
-// 2. 함수 표현식
-
-// testFunc02(); // Reference Error -> hosting 미적용
-
-let testFunc02 = function () {
-    console.log("Test Function 2")
+function getInputDataMessages() {
+    let message = '';
+    inputDatas.map(value => message += value);
+    return message;
 }
 
-testFunc02();
+function calculate() {
+    let result = parseInt(inputDatas[0]);
+    let currentNumber = 0;
+    let currentOperation = '';
+    let prevOperation = '';
 
-// 3. new Function()
+    inputDatas.forEach( value => {
+        if (validator.isNumber(parseInt(value))) {
+            currentNumber = parseInt(value);
+        } else if (validator.isOperation(value)) {
+            currentOperation = value;
+        }
 
+        switch (prevOperation) {
+            case '+':
+                result += currentNumber;
+                break;
+            case '-':
+                result -= currentNumber;
+                break;
+            case '*':
+                result *= currentNumber;
+                break;
+            case '/':
+                result /= currentNumber;
+                break;
+            default:
+                break;
+        }
+        prevOperation = currentOperation;
+        currentOperation = '';
+    })
 
-
-
-
-/* Calculator */
-
-// keyboard 입력
-// to add module run $ npm install readline-sync
-//const readLine = require('readline-sync'); // old way - common js 모듈화
-import { question } from 'readline-sync'; // ES6 방식 모듈화
-                                          // 실행방법: $ node --experimental-json-modules Calculator.mjs
-
-
-function showPrompt() {
-    console.clear();
-    const firstNumber = question("Enter first num : ");
-    const operation = question("Enter operation : ");
-    const secondNumber = question("Enter second num : ");
-
-    const validation = isNumber(firstNumber) && isOperator(operation) && isNumber(secondNumber);
-
-    if (validation) {
-        console.log("Calculating...");
-        let result = calculate(parseInt(firstNumber), operation, parseInt(secondNumber));
-        console.log(`Result : ${result}`);
-    } else {
-        console.log("Invalid input");
-    }
+    return result;
 }
 
-function isNumber(number) {
-    return !isNaN(parseInt(number));
+export default {
+    appendData,
+    getInputDataMessages,
+    calculate
 }
-
-function isOperator(operation) {
-    let operations = '+-*/';
-    return operations.indexOf(operation) !== -1;
-}
-
-function calculate(firstNumber, operator, secondNumber) {
-    switch (operator) {
-        case '+': return firstNumber + secondNumber;
-        case '-': return firstNumber - secondNumber;
-        case '*': return firstNumber * secondNumber;
-        case '/': return firstNumber / secondNumber;
-
-    }
-}
-
-showPrompt();
-
