@@ -1,6 +1,6 @@
 import TravelClubStore from "../store/TravelClubStore.mjs";
 
-import TravelClub from "../entity/TravelClub.mjs";
+// import TravelClub from "../entity/TravelClub.mjs";
 
 class ClubCoordinator {
 
@@ -66,3 +66,4 @@ coordinator.remove(newClub.name);
 console.log(coordinator.hasClubs());
 
 */
+export default ClubCoordinator;

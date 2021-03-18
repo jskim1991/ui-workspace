@@ -28,6 +28,10 @@ class TravelClub {
     set intro(intro) {
         this._intro = intro;
     }
+
+    get foundedDate() {
+        return this._foundedDate;
+    }
 }
 
 /*
