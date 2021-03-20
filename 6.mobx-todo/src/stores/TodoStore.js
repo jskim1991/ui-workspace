@@ -83,7 +83,6 @@ class TodoStore {
         console.log("input " + checked);
         let foundTodo = this._todos.find(t => t.id === this._todo.id);
         foundTodo.complete = checked;
-
         // this._todo.complete = checked;
         console.log("after " +  foundTodo.complete);
     }
