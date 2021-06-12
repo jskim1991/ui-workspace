@@ -1,0 +1,19 @@
+.Modal {
+    position: fixed;
+    z-index: 500;
+    background: darkgray;
+    width: 70%;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px black;
+    padding: 16px;
+    left: 15%;
+    top: 30%;
+    box-sizing: border-box;
+}
+
+.Modal .content {
+    background: darkgray;
+    padding: 1rem 1rem;
+    width: auto;
+    height: auto;
+}
