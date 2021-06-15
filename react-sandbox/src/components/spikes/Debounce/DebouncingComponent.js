@@ -20,7 +20,7 @@ const DebouncingComponent = () => {
 
     function onChange(event) {
         const obj = {
-            id: new Date(),
+            id: Date.now(),
             searchText: event.target.value,
         }
         setRepos((prev) => [...prev, obj])
@@ -33,11 +33,8 @@ const DebouncingComponent = () => {
                 placeholder="Search..."
                 onChange={(e) => debounceOnChange(e)}
             />
-            {repos.length > 0
-                ? repos.map((repo) => (
-                      <div key={repo.id}>{repo.searchText}</div>
-                  ))
-                : null}
+            {repos &&
+                repos.map((repo) => <div key={repo.id}>{repo.searchText}</div>)}
         </div>
     )
 }
