@@ -6,10 +6,12 @@ const ToggleSwitch = () => {
     }
 
     return (
-        <label className={classes.label}>
-            <input type="checkbox" onChange={changeHandler} />
-            <span className={[classes.slider, classes.round].join(' ')}></span>
-        </label>
+        <div>
+            <label className={classes.label}>
+                <input type="checkbox" onChange={changeHandler}/>
+                <span className={[classes.slider, classes.round].join(' ')}></span>
+            </label>
+        </div>
     )
 }
 
