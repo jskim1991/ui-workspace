@@ -1,10 +1,7 @@
 import classes from './Modal.module.css'
 import Backdrop from '../Backdrop/Backdrop'
-import {
-    numberFormatWithComma,
-    stringToNumber,
-} from '../../Converter/MoneyConverter'
-import useInput from '../../../hooks/useInput'
+import useInputMoney from '../../../hooks/useInputMoney'
+import useInputText from '../../../hooks/useInputText'
 
 const AddModal = (props) => {
     const {
@@ -14,17 +11,27 @@ const AddModal = (props) => {
         hasError: amountHasError,
         valueChangedHandler: amountChangedHandler,
         inputBlurHandler: onBlurHandler,
-        reset: reset,
-    } = useInput((v) => v.trim() !== '')
+        reset: resetAmount,
+    } = useInputMoney((v) => v.trim() !== '')
+
+    const {
+        enteredValue: title,
+        isValid: titleIsValid,
+        hasError: titleHasError,
+        onChangeHandler: titleChangedHandler,
+        onBlurHandler: titleBlurHandler,
+        reset: resetTitle,
+    } = useInputText((v) => v.trim() !== '' && v.trim().length < 10)
 
     const submitHandler = (e) => {
         e.preventDefault()
 
-        if (amountHasError) {
+        if (amountHasError || titleHasError) {
             return
         }
 
-        reset()
+        resetAmount()
+        resetTitle()
     }
 
     return (
@@ -34,23 +41,30 @@ const AddModal = (props) => {
                 <div className={classes.content}>
                     <h3>Modal header</h3>
                     <label htmlFor="title_input">Title</label>
-                    <input type="text" id="title_input" />
+                    <input
+                        type="text"
+                        id="title_input"
+                        onChange={titleChangedHandler}
+                        onBlur={titleBlurHandler}
+                        value={title}
+                    />
                     <label htmlFor="amount_input">Amount</label>
                     <input
-                        type="type"
+                        type="text"
+                        inputMode="numeric"
                         id="amount_input"
                         onChange={amountChangedHandler}
                         onBlur={onBlurHandler}
-                        value={
-                            stringToNumber(amount) >= 10000
-                                ? numberFormatWithComma(stringToNumber(amount))
-                                : amount
-                        }
+                        value={amount}
                     />
                     <div>{amountInLocalString}</div>
                     {amountHasError && <p>amount is invalid</p>}
+                    {titleHasError && <p>title is invalid</p>}
                     <button onClick={props.onClose}>close</button>
-                    <button disabled={!amountIsValid} onClick={submitHandler}>
+                    <button
+                        disabled={!amountIsValid || !titleIsValid}
+                        onClick={submitHandler}
+                    >
                         comfirm
                     </button>
                 </div>

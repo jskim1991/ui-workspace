@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import {
+    numberFormatWithComma,
     numberToKorean,
     stringToNumber,
 } from '../components/Converter/MoneyConverter'
 
-const useInput = (validateValue) => {
+const useInputMoney = (validateValue) => {
     const [enteredValue, setEnteredValue] = useState('')
     const [enteredValueLocaleString, setEnteredValueLocaleString] = useState('')
     const [isTouched, setIsTouched] = useState(false)
@@ -16,6 +17,9 @@ const useInput = (validateValue) => {
         setEnteredValue(e.target.value)
         const number = stringToNumber(e.target.value)
         if (number >= 10000) {
+            setEnteredValue(
+                numberFormatWithComma(stringToNumber(e.target.value)),
+            )
             setEnteredValueLocaleString(numberToKorean(number / 10000))
         } else if (!isNaN(number)) {
             setEnteredValue(String(number))
@@ -43,4 +47,4 @@ const useInput = (validateValue) => {
     }
 }
 
-export default useInput
+export default useInputMoney
