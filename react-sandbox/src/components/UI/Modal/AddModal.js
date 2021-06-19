@@ -1,23 +1,30 @@
 import classes from './Modal.module.css'
 import Backdrop from '../Backdrop/Backdrop'
-import { useState } from 'react'
 import {
     numberFormatWithComma,
-    numberToKorean,
     stringToNumber,
 } from '../../Converter/MoneyConverter'
+import useInput from '../../../hooks/useInput'
 
 const AddModal = (props) => {
-    const [amount, setAmount] = useState('')
-    const [amountInLocalString, setAmountInLocalString] = useState('')
+    const {
+        value: amount,
+        enteredValueLocaleString: amountInLocalString,
+        isValid: amountIsValid,
+        hasError: amountHasError,
+        valueChangedHandler: amountChangedHandler,
+        inputBlurHandler: onBlurHandler,
+        reset: reset,
+    } = useInput((v) => v.trim() !== '')
 
-    const onChangeAmount = (e) => {
-        setAmount(e.target.value)
+    const submitHandler = (e) => {
+        e.preventDefault()
 
-        const number = stringToNumber(e.target.value)
-        if (number >= 10000) {
-            setAmountInLocalString(numberToKorean(number / 10000))
+        if (amountHasError) {
+            return
         }
+
+        reset()
     }
 
     return (
@@ -32,7 +39,8 @@ const AddModal = (props) => {
                     <input
                         type="type"
                         id="amount_input"
-                        onChange={onChangeAmount}
+                        onChange={amountChangedHandler}
+                        onBlur={onBlurHandler}
                         value={
                             stringToNumber(amount) >= 10000
                                 ? numberFormatWithComma(stringToNumber(amount))
@@ -40,9 +48,11 @@ const AddModal = (props) => {
                         }
                     />
                     <div>{amountInLocalString}</div>
-                    <p>paragraph body</p>
+                    {amountHasError && <p>amount is invalid</p>}
                     <button onClick={props.onClose}>close</button>
-                    <button>comfirm</button>
+                    <button disabled={!amountIsValid} onClick={submitHandler}>
+                        comfirm
+                    </button>
                 </div>
             </div>
         </div>

@@ -9,7 +9,7 @@ import classes from './App.module.css'
 import ListTest from './ListTest'
 import ThrottlingComponent from './components/spikes/Throttle/ThrottlingComponent'
 import SideDrawer from './components/SideDrawer'
-import useDebounce from './components/spikes/Debounce/useDebounce'
+import useDebounce from './hooks/useDebounce'
 import AddModal from './components/UI/Modal/AddModal'
 
 const App = () => {
