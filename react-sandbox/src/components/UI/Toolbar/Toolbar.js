@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 
 import DrawerToggle from '../../DrawerToggle'
 import classes from './Toolbar.module.css'
@@ -6,7 +6,7 @@ import classes from './Toolbar.module.css'
 const Toolbar = (props) => {
     return (
         <header className={classes.Toolbar}>
-            <DrawerToggle clicked={props.drawerToggleClicked}/>
+            <DrawerToggle clicked={props.drawerToggleClicked} />
         </header>
     )
 }

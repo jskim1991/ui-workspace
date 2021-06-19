@@ -1,6 +1,6 @@
-import React, { Fragment, useState } from 'react'
+import React from 'react'
 import classes from './SideDrawer.module.css'
-import Backdrop from './Backdrop'
+import Backdrop from './UI/Backdrop/Backdrop'
 
 const SideDrawer = (props) => {
     let sideDrawerStyles = [classes.SideDrawer, classes.Close]
