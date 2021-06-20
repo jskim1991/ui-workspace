@@ -9,7 +9,7 @@ const AddModal = (props) => {
         enteredValueLocaleString: amountInLocalString,
         isValid: amountIsValid,
         hasError: amountHasError,
-        valueChangedHandler: amountChangedHandler,
+        valueChangeHandler: amountChangedHandler,
         inputBlurHandler: onBlurHandler,
         reset: resetAmount,
     } = useInputMoney((v) => v.trim() !== '')
@@ -30,6 +30,8 @@ const AddModal = (props) => {
             return
         }
 
+        console.log('submit form', title, amount)
+
         resetAmount()
         resetTitle()
     }
@@ -40,33 +42,35 @@ const AddModal = (props) => {
             <div className={classes.Modal}>
                 <div className={classes.content}>
                     <h3>Modal header</h3>
-                    <label htmlFor="title_input">Title</label>
-                    <input
-                        type="text"
-                        id="title_input"
-                        onChange={titleChangedHandler}
-                        onBlur={titleBlurHandler}
-                        value={title}
-                    />
-                    <label htmlFor="amount_input">Amount</label>
-                    <input
-                        type="text"
-                        inputMode="numeric"
-                        id="amount_input"
-                        onChange={amountChangedHandler}
-                        onBlur={onBlurHandler}
-                        value={amount}
-                    />
-                    <div>{amountInLocalString}</div>
-                    {amountHasError && <p>amount is invalid</p>}
-                    {titleHasError && <p>title is invalid</p>}
-                    <button onClick={props.onClose}>close</button>
-                    <button
-                        disabled={!amountIsValid || !titleIsValid}
-                        onClick={submitHandler}
-                    >
-                        comfirm
-                    </button>
+                    <form onSubmit={submitHandler}>
+                        <label htmlFor="title_input">Title</label>
+                        <input
+                            type="text"
+                            id="title_input"
+                            onChange={titleChangedHandler}
+                            onBlur={titleBlurHandler}
+                            value={title}
+                        />
+                        <label htmlFor="amount_input">Amount</label>
+                        <input
+                            type="text"
+                            inputMode="numeric"
+                            id="amount_input"
+                            onChange={amountChangedHandler}
+                            onBlur={onBlurHandler}
+                            value={amount}
+                        />
+                        <div>{amountInLocalString}</div>
+                        {amountHasError && <p>amount is invalid</p>}
+                        {titleHasError && <p>title is invalid</p>}
+                        <button onClick={props.onClose}>close</button>
+                        <button
+                            disabled={!amountIsValid || !titleIsValid}
+                            onClick={submitHandler}
+                        >
+                            comfirm
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

@@ -13,7 +13,7 @@ const useInputMoney = (validateValue) => {
     const valueIsValid = validateValue(enteredValue)
     const hasError = !valueIsValid && isTouched
 
-    const valueChangedHandler = (e) => {
+    const valueChangeHandler = (e) => {
         setEnteredValue(e.target.value)
         const number = stringToNumber(e.target.value)
         if (number >= 10000) {
@@ -41,7 +41,7 @@ const useInputMoney = (validateValue) => {
         enteredValueLocaleString,
         isValid: valueIsValid,
         hasError,
-        valueChangedHandler,
+        valueChangeHandler: valueChangeHandler,
         inputBlurHandler,
         reset,
     }
