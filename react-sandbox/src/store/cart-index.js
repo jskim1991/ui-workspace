@@ -1,15 +1,26 @@
-import { SHOW_NOTIFICATION } from './uiIndex'
+import { SHOW_NOTIFICATION } from './ui-index'
 
 export const ADD = 'add'
 export const REMOVE = 'remove'
+export const REPLACE = 'replace'
 
 const initialState = {
     items: [],
     totalQuantity: 0,
     totalAmount: 0,
+    changed: false,
 }
 
 const cartReducer = (state = initialState, action) => {
+    if (action.type === REPLACE) {
+        return {
+            ...state,
+            totalQuantity: action.payload.totalQuantity,
+            totalAmount: action.payload.totalAmount,
+            items: action.payload.items,
+        }
+    }
+
     if (action.type === ADD) {
         const newItem = action.payload
 
@@ -35,6 +46,7 @@ const cartReducer = (state = initialState, action) => {
                 quantity: 1,
                 totalPrice: newItem.price,
                 name: newItem.title,
+                changed: true,
             })
         }
         return {
@@ -42,6 +54,7 @@ const cartReducer = (state = initialState, action) => {
             items: updatedItems,
             totalQuantity: state.totalQuantity + 1,
             totalAmount: state.totalAmount + newItem.price,
+            changed: true,
         }
     }
 
@@ -57,6 +70,8 @@ const cartReducer = (state = initialState, action) => {
                 ...state,
                 items: filteredItems,
                 totalQuantity: state.totalQuantity - 1,
+                totalAmount: state.totalAmount - existingItem.price,
+                changed: true,
             }
         } else {
             const updatedItem = {
@@ -70,60 +85,13 @@ const cartReducer = (state = initialState, action) => {
                 ...state,
                 items: updatedItems,
                 totalQuantity: state.totalQuantity - 1,
+                totalAmount: state.totalAmount - existingItem.price,
+                changed: true,
             }
         }
     }
 
     return state
-}
-
-export const sendCartData = (cart) => {
-    return async (dispatch) => {
-        dispatch({
-            type: SHOW_NOTIFICATION,
-            payload: {
-                status: 'Pending...',
-                title: 'Sending...',
-                message: 'Sending cart data',
-            },
-        })
-
-        const sendRequest = async () => {
-            const response = await fetch(
-                'https://react-advanced-redux-fe6e0-default-rtdb.firebaseio.com/cart.json',
-                {
-                    method: 'PUT',
-                    body: JSON.stringify(cart),
-                },
-            )
-
-            if (!response.ok) {
-                throw new Error('Sending cart data failed')
-            }
-        }
-
-        try {
-            await sendRequest()
-        } catch (error) {
-            dispatch({
-                type: SHOW_NOTIFICATION,
-                payload: {
-                    status: 'error',
-                    title: 'Error!',
-                    message: 'Sending cart data failed',
-                },
-            })
-        }
-
-        dispatch({
-            type: SHOW_NOTIFICATION,
-            payload: {
-                status: 'success',
-                title: 'Success!',
-                message: 'Sent cart data successfully',
-            },
-        })
-    }
 }
 
 export default cartReducer

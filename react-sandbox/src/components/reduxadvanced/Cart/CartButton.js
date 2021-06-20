@@ -1,6 +1,6 @@
 import classes from './CartButton.module.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { TOGGLE } from '../../../store/uiIndex'
+import { TOGGLE } from '../../../store/ui-index'
 
 const CartButton = (props) => {
     const dispatch = useDispatch()

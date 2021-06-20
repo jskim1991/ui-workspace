@@ -1,7 +1,7 @@
 import { applyMiddleware, combineReducers } from 'redux'
 import counterReducer from './index'
-import uiReducer from './uiIndex'
-import cartReducer from './cartIndex'
+import uiReducer from './ui-index'
+import cartReducer from './cart-index'
 
 export default combineReducers({
     counterReducer,

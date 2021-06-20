@@ -16,9 +16,8 @@ import Layout from './components/reduxadvanced/Layout/Layout'
 import Cart from './components/reduxadvanced/Cart/Cart'
 import Products from './components/reduxadvanced/Shop/Products'
 import { useDispatch, useSelector } from 'react-redux'
-import { SHOW_NOTIFICATION } from './store/uiIndex'
 import Notification from './components/reduxadvanced/UI/Notification'
-import { sendCartData } from './store/cartIndex'
+import { fetchCardData, sendCartData } from './store/cart-actions'
 
 let isInitial = true
 
@@ -39,12 +38,18 @@ const App = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
+        dispatch(fetchCardData())
+    }, [dispatch])
+
+    useEffect(() => {
         if (isInitial) {
             isInitial = false
             return
         }
 
-        dispatch(sendCartData(cart))
+        if (cart.changed) {
+            dispatch(sendCartData(cart))
+        }
     }, [cart, dispatch]) // dispatch will never trigger this to run
 
     const showSideDrawer = () => {

@@ -1,7 +1,7 @@
 import Card from '../UI/Card'
 import classes from './ProductItem.module.css'
 import { useDispatch } from 'react-redux'
-import { ADD } from '../../../store/cartIndex'
+import { ADD } from '../../../store/cart-index'
 
 const ProductItem = (props) => {
     const dispatch = useDispatch()
