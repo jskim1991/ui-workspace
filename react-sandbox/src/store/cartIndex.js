@@ -1,3 +1,5 @@
+import { SHOW_NOTIFICATION } from './uiIndex'
+
 export const ADD = 'add'
 export const REMOVE = 'remove'
 
@@ -73,6 +75,55 @@ const cartReducer = (state = initialState, action) => {
     }
 
     return state
+}
+
+export const sendCartData = (cart) => {
+    return async (dispatch) => {
+        dispatch({
+            type: SHOW_NOTIFICATION,
+            payload: {
+                status: 'Pending...',
+                title: 'Sending...',
+                message: 'Sending cart data',
+            },
+        })
+
+        const sendRequest = async () => {
+            const response = await fetch(
+                'https://react-advanced-redux-fe6e0-default-rtdb.firebaseio.com/cart.json',
+                {
+                    method: 'PUT',
+                    body: JSON.stringify(cart),
+                },
+            )
+
+            if (!response.ok) {
+                throw new Error('Sending cart data failed')
+            }
+        }
+
+        try {
+            await sendRequest()
+        } catch (error) {
+            dispatch({
+                type: SHOW_NOTIFICATION,
+                payload: {
+                    status: 'error',
+                    title: 'Error!',
+                    message: 'Sending cart data failed',
+                },
+            })
+        }
+
+        dispatch({
+            type: SHOW_NOTIFICATION,
+            payload: {
+                status: 'success',
+                title: 'Success!',
+                message: 'Sent cart data successfully',
+            },
+        })
+    }
 }
 
 export default cartReducer

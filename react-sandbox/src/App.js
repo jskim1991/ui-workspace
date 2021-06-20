@@ -18,6 +18,7 @@ import Products from './components/reduxadvanced/Shop/Products'
 import { useDispatch, useSelector } from 'react-redux'
 import { SHOW_NOTIFICATION } from './store/uiIndex'
 import Notification from './components/reduxadvanced/UI/Notification'
+import { sendCartData } from './store/cartIndex'
 
 let isInitial = true
 
@@ -38,52 +39,12 @@ const App = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        const sendCartData = async () => {
-            dispatch({
-                type: SHOW_NOTIFICATION,
-                payload: {
-                    status: 'Pending...',
-                    title: 'Sending...',
-                    message: 'Sending cart data',
-                },
-            })
-            const response = await fetch(
-                'https://react-advanced-redux-fe6e0-default-rtdb.firebaseio.com/cart.json',
-                {
-                    method: 'PUT',
-                    body: JSON.stringify(cart),
-                },
-            )
-
-            if (!response.ok) {
-                throw new Error('Sending cart data failed')
-            }
-
-            dispatch({
-                type: SHOW_NOTIFICATION,
-                payload: {
-                    status: 'success',
-                    title: 'Success!',
-                    message: 'Sent cart data successfully',
-                },
-            })
-        }
-
         if (isInitial) {
             isInitial = false
             return
         }
 
-        sendCartData().catch((error) => {
-            dispatch({
-                type: SHOW_NOTIFICATION,
-                payload: {
-                    status: 'error',
-                    title: 'Error!',
-                    message: 'Sending cart data failed',
-                },
-            })
-        })
+        dispatch(sendCartData(cart))
     }, [cart, dispatch]) // dispatch will never trigger this to run
 
     const showSideDrawer = () => {
