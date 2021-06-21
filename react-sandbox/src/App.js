@@ -19,6 +19,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import Notification from './components/reduxadvanced/UI/Notification'
 import { fetchCardData, sendCartData } from './store/cart-actions'
 
+import { Route } from 'react-router-dom'
+import Welcome from './routes/Welcome'
+import ProductsSample from './routes/ProductsSample'
+import MainHeader from './routes/MainHeader'
+
 let isInitial = true
 
 const App = () => {
@@ -90,6 +95,16 @@ const App = () => {
 
     return (
         <div>
+            <MainHeader />
+            <main>
+                <Route path="/welcome">
+                    <Welcome />
+                </Route>
+                <Route path="/products">
+                    <ProductsSample />
+                </Route>
+            </main>
+
             <Toolbar drawerToggleClicked={showSideDrawer} />
             <SideDrawer open={showSide} closed={hideSideDrawer} />
             <main className={classes.Main}>

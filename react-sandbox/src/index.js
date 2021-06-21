@@ -8,15 +8,18 @@ import rootReducer from './store/store'
 
 import thunkMiddleware from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
+import { BrowserRouter } from 'react-router-dom'
 
 const composeEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleware))
 
 const store = createStore(rootReducer, composeEnhancer)
 
 ReactDOM.render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
+    <BrowserRouter>
+        <Provider store={store}>
+            <App />
+        </Provider>
+    </BrowserRouter>,
     document.getElementById('root'),
 )
 
