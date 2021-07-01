@@ -12,8 +12,10 @@ body {
   box-sizing: border-box;
 }
 
-html {
+html, body {
   font-family: 'Noto Sans JP', sans-serif;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 main {

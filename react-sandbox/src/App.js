@@ -23,6 +23,7 @@ import { Route } from 'react-router-dom'
 import Welcome from './routes/Welcome'
 import ProductsSample from './routes/ProductsSample'
 import MainHeader from './routes/MainHeader'
+import SwipeableComponent from './components/spikes/SwipeableComponent/SwipeableComponent'
 
 let isInitial = true
 
@@ -154,6 +155,10 @@ const App = () => {
                     {showCart && <Cart />}
                     <Products />
                 </Layout>
+
+                <SwipeableComponent />
+                <SwipeableComponent />
+                <SwipeableComponent />
             </main>
         </div>
     )
