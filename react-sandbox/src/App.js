@@ -23,7 +23,7 @@ import { Route } from 'react-router-dom'
 import Welcome from './routes/Welcome'
 import ProductsSample from './routes/ProductsSample'
 import MainHeader from './routes/MainHeader'
-import SwipeableComponent from './components/spikes/SwipeableComponent/SwipeableComponent'
+import SwipeableComponents from './components/spikes/SwipeableComponent/SwipeableComponents'
 
 let isInitial = true
 
@@ -144,6 +144,8 @@ const App = () => {
                 )}
                 <Counter />
 
+                <SwipeableComponents />
+
                 {notification && (
                     <Notification
                         status={notification.status}
@@ -156,9 +158,7 @@ const App = () => {
                     <Products />
                 </Layout>
 
-                <SwipeableComponent />
-                <SwipeableComponent />
-                <SwipeableComponent />
+                <div>End</div>
             </main>
         </div>
     )
