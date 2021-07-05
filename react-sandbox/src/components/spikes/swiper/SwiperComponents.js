@@ -1,7 +1,8 @@
-import SwipeableComponent from './SwipeableComponent'
 import { useState } from 'react'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import SwiperComponent from './SwiperComponent'
 
-const SwipeableComponents = () => {
+const SwiperComponents = () => {
     const initialState = [
         {
             value: 1,
@@ -49,9 +50,9 @@ const SwipeableComponents = () => {
     }
 
     return (
-        <>
+        <div>
             {list.map((item, idx) => (
-                <SwipeableComponent
+                <SwiperComponent
                     key={idx}
                     index={idx}
                     onUpdateSwipeState={updateSwipeState}
@@ -62,10 +63,10 @@ const SwipeableComponents = () => {
                     {item.isSwipedLeft && (
                         <button onClick={buttonClickHandler}>edit</button>
                     )}
-                </SwipeableComponent>
+                </SwiperComponent>
             ))}
-        </>
+        </div>
     )
 }
 
-export default SwipeableComponents
+export default SwiperComponents

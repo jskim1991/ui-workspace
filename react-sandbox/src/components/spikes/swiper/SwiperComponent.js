@@ -1,25 +1,21 @@
+import { Swiper, SwiperSlide } from 'swiper/react'
 import { useRef, useState } from 'react'
 
-import classes from './SwipeableComponent.module.css'
-
-const SwipeableComponent = (props) => {
-    const [touchStart, setTouchStart] = useState(0)
-    const [touchEnd, setTouchEnd] = useState(0)
+const SwiperComponent = (props) => {
     const [isSwiping, setSwiping] = useState(false)
 
-    function touchStartHandler(e) {
-        console.log('touch start')
-        setTouchStart(e.targetTouches[0].clientX)
-    }
+    function touchStartHandler(e) {}
 
     function touchMoveHandler(e) {
         console.log('touch move')
         setSwiping(true)
-        setTouchEnd(e.targetTouches[0].clientX)
     }
 
-    function touchEndHandler() {
+    function touchEndHandler(e) {
         console.log('touch end')
+        const touchStart = e.touches.startX
+        const touchEnd = e.touches.currentX
+
         if (isSwiping) {
             if (touchStart - touchEnd > 100) {
                 props.onUpdateSwipeState(props.index)
@@ -33,14 +29,14 @@ const SwipeableComponent = (props) => {
     }
 
     return (
-        <div
-            onTouchStart={touchStartHandler}
+        <Swiper
+            // onTouchStart={touchStartHandler}
             onTouchMove={touchMoveHandler}
             onTouchEnd={touchEndHandler}
         >
-            {props.children}
-        </div>
+            <SwiperSlide>{props.children}</SwiperSlide>
+        </Swiper>
     )
 }
 
-export default SwipeableComponent
+export default SwiperComponent

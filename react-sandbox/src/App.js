@@ -24,6 +24,8 @@ import Welcome from './routes/Welcome'
 import ProductsSample from './routes/ProductsSample'
 import MainHeader from './routes/MainHeader'
 import SwipeableComponents from './components/spikes/SwipeableComponent/SwipeableComponents'
+import SwiperComponent from './components/spikes/swiper/SwiperComponent'
+import SwiperComponents from './components/spikes/swiper/SwiperComponents'
 
 let isInitial = true
 
@@ -157,6 +159,8 @@ const App = () => {
                     {showCart && <Cart />}
                     <Products />
                 </Layout>
+
+                <SwiperComponents />
 
                 <div>End</div>
             </main>
