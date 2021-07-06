@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperComponent from './SwiperComponent'
 
 const SwiperComponents = () => {
