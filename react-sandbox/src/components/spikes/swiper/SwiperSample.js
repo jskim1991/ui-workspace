@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import classes from './SwiperSample.module.css'
 
 const SwiperSample = () => {
-    const initialState = [
+    const list = [
         {
             value: 1,
             isSwipedLeft: false,
@@ -19,50 +19,23 @@ const SwiperSample = () => {
         },
     ]
 
-    const [list, setList] = useState(initialState)
-
     function updateSwipeState(index) {
         console.log('update others')
-        // const updatedList = list.map((d, idx) => {
-        //     return idx === index
-        //         ? {
-        //               value: d.value,
-        //               isSwipedLeft: true,
-        //           }
-        //         : {
-        //               value: d.value,
-        //               isSwipedLeft: false,
-        //           }
-        // })
-
         list.map((d, idx) => {
             if (idx === index) {
             } else {
                 const swiper = document.querySelectorAll('.swiper-container')[
                     idx
                 ].swiper
-                swiper.slidePrev(0.1, false)
+                swiper.slidePrev(300, false)
             }
         })
-
-        // setList(updatedList)
     }
-
-    // function restoreSwipeState(index) {
-    //     const updatedList = [...list]
-    //     updatedList[index] = {
-    //         value: updatedList[index].value,
-    //         isSwipedLeft: false,
-    //     }
-    //     setList(updatedList)
-    // }
 
     function buttonClickHandler(e) {
         e.preventDefault()
         console.log('button clicked')
     }
-
-    console.log('render', list)
 
     return (
         <div>
