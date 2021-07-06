@@ -26,6 +26,7 @@ import MainHeader from './routes/MainHeader'
 import SwipeableComponents from './components/spikes/SwipeableComponent/SwipeableComponents'
 import SwiperComponent from './components/spikes/swiper/SwiperComponent'
 import SwiperComponents from './components/spikes/swiper/SwiperComponents'
+import SwiperSample from './components/spikes/swiper/SwiperSample'
 
 let isInitial = true
 
@@ -160,6 +161,7 @@ const App = () => {
                     <Products />
                 </Layout>
 
+                <SwiperSample />
                 <SwiperComponents />
 
                 <div>End</div>

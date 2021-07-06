@@ -1,0 +1,40 @@
+.menu {
+    text-align: center;
+    background-color: purple;
+    min-width: 50px;
+    width: 70%;
+    max-width: 30vw;
+    color: #fff;
+}
+
+.content {
+    text-align: center;
+    color: red;
+    width: 100%;
+}
+
+/*.swiper-container {*/
+/*    overflow: hidden;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*}*/
+
+/*.swiper-slide {*/
+/*    text-align: center;*/
+/*    font-size: 50px;*/
+/*    background: #fff;*/
+
+/*    !* Center slide text vertically *!*/
+/*    display: -webkit-box;*/
+/*    display: -ms-flexbox;*/
+/*    display: -webkit-flex;*/
+/*    display: flex;*/
+/*    -webkit-box-pack: center;*/
+/*    -ms-flex-pack: center;*/
+/*    -webkit-justify-content: center;*/
+/*    justify-content: center;*/
+/*    -webkit-box-align: center;*/
+/*    -ms-flex-align: center;*/
+/*    -webkit-align-items: center;*/
+/*    align-items: center;*/
+/*}*/
