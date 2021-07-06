@@ -23,20 +23,39 @@ const SwiperSample = () => {
 
     function updateSwipeState(index) {
         console.log('update others')
-        const updatedList = list.map((d, idx) => {
-            return idx === index
-                ? {
-                      value: d.value,
-                      isSwipedLeft: true,
-                  }
-                : {
-                      value: d.value,
-                      isSwipedLeft: false,
-                  }
+        // const updatedList = list.map((d, idx) => {
+        //     return idx === index
+        //         ? {
+        //               value: d.value,
+        //               isSwipedLeft: true,
+        //           }
+        //         : {
+        //               value: d.value,
+        //               isSwipedLeft: false,
+        //           }
+        // })
+
+        list.map((d, idx) => {
+            if (idx === index) {
+            } else {
+                const swiper = document.querySelectorAll('.swiper-container')[
+                    idx
+                ].swiper
+                swiper.slidePrev(0.1, false)
+            }
         })
-        console.log(updatedList)
-        setList(updatedList)
+
+        // setList(updatedList)
     }
+
+    // function restoreSwipeState(index) {
+    //     const updatedList = [...list]
+    //     updatedList[index] = {
+    //         value: updatedList[index].value,
+    //         isSwipedLeft: false,
+    //     }
+    //     setList(updatedList)
+    // }
 
     function buttonClickHandler(e) {
         e.preventDefault()
@@ -51,10 +70,10 @@ const SwiperSample = () => {
                 <Swiper
                     slidesPerView="auto"
                     initialSlide={item.isSwipedLeft ? 1 : 0}
-                    onSlideChange={() => console.log('slide change')}
-                    onSlideMove={() => console.log('slide move')}
+                    // onSlideChange={() => console.log('slide change')}
+                    // onSlideMove={() => console.log('slide move')}
                     onReachEnd={() => updateSwipeState(index)}
-                    onReachBeginning={() => console.log('reach begin')}
+                    // onReachBeginning={() => restoreSwipeState(index)}
                 >
                     <SwiperSlide className={classes.content}>
                         {`item number ${index}`}
