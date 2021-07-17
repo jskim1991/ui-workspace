@@ -20,7 +20,7 @@ const SwiperSample = () => {
     ]
 
     function updateSwipeState(index) {
-        console.log('update others')
+        console.log('update others beside', index)
         list.map((d, idx) => {
             if (idx === index) {
             } else {
@@ -41,6 +41,7 @@ const SwiperSample = () => {
         <div>
             {list.map((item, index) => (
                 <Swiper
+                    key={index}
                     slidesPerView="auto"
                     initialSlide={item.isSwipedLeft ? 1 : 0}
                     // onSlideChange={() => console.log('slide change')}

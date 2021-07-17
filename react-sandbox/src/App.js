@@ -27,6 +27,11 @@ import SwipeableComponents from './components/spikes/SwipeableComponent/Swipeabl
 import SwiperComponent from './components/spikes/swiper/SwiperComponent'
 import SwiperComponents from './components/spikes/swiper/SwiperComponents'
 import SwiperSample from './components/spikes/swiper/SwiperSample'
+import Login from './components/spikes/login/Login'
+import { Home } from './components/spikes/login/Home'
+import KakaoLogin from './components/spikes/login/KakaoLogin'
+import KakaoLogout from './components/spikes/login/KakaoLogout'
+import SampleTimer from './components/spikes/timer/SampleTimer'
 
 let isInitial = true
 
@@ -138,6 +143,8 @@ const App = () => {
 
                 <ThrottlingComponent />
 
+                <SampleTimer />
+
                 <h1>Hello there</h1>
                 <button onClick={showAddModalHandler}>Add Value</button>
                 {showAddModal && (
@@ -163,6 +170,11 @@ const App = () => {
 
                 <SwiperSample />
                 <SwiperComponents />
+
+                {/*<Login />*/}
+                <Home />
+                <KakaoLogin />
+                <KakaoLogout />
 
                 <div>End</div>
             </main>
