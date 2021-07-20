@@ -69,13 +69,13 @@ const SelfAuth = () => {
             <label htmlFor="auth_birthdate">생년월일</label>
             <input
                 id="auth_birthdate"
-                type="text"
+                type="number"
                 maxLength="6"
                 ref={birthdateRef}
                 onChange={birthdateHandler}
             />
             <input
-                type="text"
+                type="number"
                 maxLength="1"
                 ref={selfIdRef}
                 onChange={selfIdHandler}
@@ -101,7 +101,7 @@ const SelfAuth = () => {
             )}
             {authenticate && (
                 <div>
-                    <input type="text" ref={textRef} />
+                    <input type="number" ref={textRef} />
                     <button onClick={checkTextHandler}>Check Text</button>
                     <SampleTimer />
                 </div>
