@@ -34,17 +34,11 @@ export const AuthContextProvider = (props) => {
     // DO NOT use useEffect here for getting token when page loads
     const tokenData = retrieveStoredToken()
     let initialToken
+    if (tokenData) {
+        initialToken = tokenData
+    }
 
-    useEffect(() => {
-        if (tokenData) {
-            console.log(tokenData.duration)
-            logoutTimer = setTimeout(logoutHandler, tokenData.duration)
-        }
-    }, [tokenData, logoutHandler])
-
-    const [token, setToken] = useState(initialToken)
-
-    const userIsLoggedIn = !!token
+    const [temp, setTemp] = useState('')
 
     const logoutHandler = useCallback(() => {
         setToken(null)
@@ -57,6 +51,17 @@ export const AuthContextProvider = (props) => {
         // logoutTimer is global var so it does not come into react rendering,
         // so we don't need it as a dependency
     }, [])
+
+    useEffect(() => {
+        if (tokenData) {
+            console.log(tokenData.duration)
+            logoutTimer = setTimeout(logoutHandler, tokenData.duration)
+        }
+    }, [tokenData, logoutHandler])
+
+    const [token, setToken] = useState(initialToken)
+
+    const userIsLoggedIn = !!token
 
     const loginHandler = (token, expirationTime) => {
         localStorage.setItem('token', token)

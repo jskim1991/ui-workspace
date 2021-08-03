@@ -1,4 +1,4 @@
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Redirect, Route, Switch } from 'react-router-dom'
 
 import Layout from './components/Layout/Layout'
 import UserProfile from './components/Profile/UserProfile'
@@ -14,7 +14,8 @@ function App() {
         <Layout>
             <Switch>
                 <Route path="/" exact>
-                    <HomePage />
+                    {authContext.isLoggedIn && <HomePage />}
+                    {!authContext.isLoggedIn && <AuthPage />}
                 </Route>
                 {!authContext.isLoggedIn && (
                     <Route path="/auth">
